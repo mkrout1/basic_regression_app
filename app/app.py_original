@@ -1,0 +1,15 @@
+from flask import Flask
+import numpy as np
+from joblib import load
+
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello_world():
+    # return "<p>Hello, World!</p>"
+    test_np_input = np.arange(19)
+    model = load('linearmodel.joblib')
+    preds = model.predict(test_np_input.reshape(-1,1))
+    preds_as_str = str(preds)
+    return preds_as_str
